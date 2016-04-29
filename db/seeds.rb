@@ -1,3 +1,5 @@
-Album.create(name: "Shatter Me", artist_name: "Lindsey Stirling", release_date: "2014/04/29")
+ls = Artist.create(name: "Lindsey Stirling")
+Album.create(name: "Shatter Me", artist: ls, release_date: "2014/04/29")
 
-Album.create(name: "The Piano Guys", artist_name: "Wonders", release_date: "2014/10/07")
+tpg = Artist.create(name: "The Piano Guys")
+Album.create(name: "Wonders", artist: tpg, release_date: "2014/10/07")
