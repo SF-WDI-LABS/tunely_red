@@ -5,9 +5,9 @@
 #  id           :integer          not null, primary key
 #  name         :string
 #  release_date :date
-#  artist_name  :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  artist_id    :integer
 #
 
 FactoryGirl.define do
