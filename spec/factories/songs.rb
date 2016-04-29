@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :song do
-    name "MyString"
+    name "Rain"
     track_number 1
     album
   end

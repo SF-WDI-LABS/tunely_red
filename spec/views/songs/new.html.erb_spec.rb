@@ -18,7 +18,6 @@ RSpec.describe "songs/new", type: :view do
 
       assert_select "input#song_track_number[name=?]", "song[track_number]"
 
-      assert_select "input#song_album_id[name=?]", "song[album_id]"
     end
   end
 end
