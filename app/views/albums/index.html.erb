@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'New Album', new_album_path, class: 'btn btn-primary' %>
+<%= link_to 'View Artists', artists_path, class: 'btn btn-primary' %>
 
 <h1>Albums</h1>
   <%= render @albums, collection: @albums %>
