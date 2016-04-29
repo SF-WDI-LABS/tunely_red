@@ -103,14 +103,14 @@ RSpec.describe AlbumsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { artist_name: 'test', name: 'music album' }
       }
 
       it "updates the requested album" do
         album = Album.create! valid_attributes
         put :update, {:id => album.to_param, :album => new_attributes}, valid_session
         album.reload
-        skip("Add assertions for updated state")
+        expect(album.name).to eq 'music album'
       end
 
       it "assigns the requested album as @album" do
