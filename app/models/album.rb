@@ -11,4 +11,6 @@
 #
 
 class Album < ActiveRecord::Base
+  validates_presence_of :artist_name
+  validates_presence_of :name
 end
