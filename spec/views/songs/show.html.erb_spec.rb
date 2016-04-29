@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "songs/show", type: :view do
   before(:each) do
+    @album = FactoryGirl.create(:album)
     @song = assign(:song, Song.create!(
       :name => "Name",
       :track_number => 1,
-      :album => nil
+      :album => @album
     ))
   end
 

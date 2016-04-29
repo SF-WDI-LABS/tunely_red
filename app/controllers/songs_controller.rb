@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+  before_action :set_album
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
   # GET /songs
@@ -24,11 +25,11 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(song_params)
+    @song = Song.new(song_params.merge(album_id: @album.id))
 
     respond_to do |format|
       if @song.save
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
+        format.html { redirect_to album_song_url(@album, @song), notice: 'Song was successfully created.' }
         format.json { render :show, status: :created, location: @song }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class SongsController < ApplicationController
   def update
     respond_to do |format|
       if @song.update(song_params)
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
+        format.html { redirect_to album_song_url(@album, @song), notice: 'Song was successfully updated.' }
         format.json { render :show, status: :ok, location: @song }
       else
         format.html { render :edit }
@@ -56,15 +57,19 @@ class SongsController < ApplicationController
   def destroy
     @song.destroy
     respond_to do |format|
-      format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
+      format.html { redirect_to album_songs_url(@album), notice: 'Song was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def set_album
+      @album = Album.find(params[:album_id])
+    end
+
     def set_song
-      @song = Song.find(params[:id])
+      @song = @album.songs.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

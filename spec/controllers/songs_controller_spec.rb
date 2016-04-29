@@ -23,12 +23,14 @@ RSpec.describe SongsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Song. As you add validations to Song, be sure to
   # adjust the attributes here as well.
+
+  let(:album_id) { FactoryGirl.create(:album).id }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:song).merge({album_id: album_id})
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    pending "currently has no invalid attributes"
   }
 
   # This should return the minimal set of values that should be in the session
@@ -39,7 +41,7 @@ RSpec.describe SongsController, type: :controller do
   describe "GET #index" do
     it "assigns all songs as @songs" do
       song = Song.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {album_id: album_id}, valid_session
       expect(assigns(:songs)).to eq([song])
     end
   end
@@ -47,14 +49,15 @@ RSpec.describe SongsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested song as @song" do
       song = Song.create! valid_attributes
-      get :show, {:id => song.to_param}, valid_session
+      get :show, {:id => song.to_param, album_id: album_id}, valid_session
       expect(assigns(:song)).to eq(song)
     end
   end
 
   describe "GET #new" do
     it "assigns a new song as @song" do
-      get :new, {}, valid_session
+      album_id = FactoryGirl.create(:album).id
+      get :new, {album_id: album_id}, valid_session
       expect(assigns(:song)).to be_a_new(Song)
     end
   end
@@ -62,7 +65,7 @@ RSpec.describe SongsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested song as @song" do
       song = Song.create! valid_attributes
-      get :edit, {:id => song.to_param}, valid_session
+      get :edit, {:id => song.to_param, album_id: album_id}, valid_session
       expect(assigns(:song)).to eq(song)
     end
   end
@@ -71,30 +74,30 @@ RSpec.describe SongsController, type: :controller do
     context "with valid params" do
       it "creates a new Song" do
         expect {
-          post :create, {:song => valid_attributes}, valid_session
+          post :create, {:song => valid_attributes, album_id: album_id}, valid_session
         }.to change(Song, :count).by(1)
       end
 
       it "assigns a newly created song as @song" do
-        post :create, {:song => valid_attributes}, valid_session
+        post :create, {:song => valid_attributes, album_id: album_id } , valid_session
         expect(assigns(:song)).to be_a(Song)
         expect(assigns(:song)).to be_persisted
       end
 
       it "redirects to the created song" do
-        post :create, {:song => valid_attributes}, valid_session
-        expect(response).to redirect_to(Song.last)
+        post :create, {:song => valid_attributes, album_id: album_id }, valid_session
+        expect(response).to redirect_to(album_song_url(album_id, Song.last))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved song as @song" do
-        post :create, {:song => invalid_attributes}, valid_session
+        post :create, {:song => invalid_attributes, album_id: album_id}, valid_session
         expect(assigns(:song)).to be_a_new(Song)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:song => invalid_attributes}, valid_session
+        post :create, {:song => invalid_attributes, album_id: album_id}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -103,39 +106,39 @@ RSpec.describe SongsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: 'a new name!', track_number: 300}
       }
 
       it "updates the requested song" do
         song = Song.create! valid_attributes
-        put :update, {:id => song.to_param, :song => new_attributes}, valid_session
+        put :update, {:id => song.to_param, :song => new_attributes, album_id: album_id}, valid_session
         song.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested song as @song" do
         song = Song.create! valid_attributes
-        put :update, {:id => song.to_param, :song => valid_attributes}, valid_session
+        put :update, {:id => song.to_param, :song => valid_attributes, album_id: album_id}, valid_session
         expect(assigns(:song)).to eq(song)
       end
 
       it "redirects to the song" do
         song = Song.create! valid_attributes
-        put :update, {:id => song.to_param, :song => valid_attributes}, valid_session
-        expect(response).to redirect_to(song)
+        put :update, {:id => song.to_param, :song => valid_attributes, album_id: album_id}, valid_session
+        expect(response).to redirect_to(album_song_url(album_id, song))
       end
     end
 
     context "with invalid params" do
       it "assigns the song as @song" do
         song = Song.create! valid_attributes
-        put :update, {:id => song.to_param, :song => invalid_attributes}, valid_session
+        put :update, {:id => song.to_param, :song => invalid_attributes, album_id: album_id}, valid_session
         expect(assigns(:song)).to eq(song)
       end
 
       it "re-renders the 'edit' template" do
         song = Song.create! valid_attributes
-        put :update, {:id => song.to_param, :song => invalid_attributes}, valid_session
+        put :update, {:id => song.to_param, :song => invalid_attributes, album_id: album_id}, valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -145,14 +148,14 @@ RSpec.describe SongsController, type: :controller do
     it "destroys the requested song" do
       song = Song.create! valid_attributes
       expect {
-        delete :destroy, {:id => song.to_param}, valid_session
+        delete :destroy, {:id => song.to_param, album_id: album_id}, valid_session
       }.to change(Song, :count).by(-1)
     end
 
     it "redirects to the songs list" do
       song = Song.create! valid_attributes
-      delete :destroy, {:id => song.to_param}, valid_session
-      expect(response).to redirect_to(songs_url)
+      delete :destroy, {:id => song.to_param, album_id: album_id}, valid_session
+      expect(response).to redirect_to(album_songs_url(album_id))
     end
   end
 
