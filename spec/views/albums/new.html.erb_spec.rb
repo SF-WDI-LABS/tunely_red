@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "albums/new", type: :view do
   before(:each) do
-    assign(:album, Album.new(
-      :name => "MyString",
-      :artist_name => "MyString"
-    ))
-  end
-
-  it "renders new album form" do
+    assign(:album, Album.new)
     render
 
     assert_select "form[action=?][method=?]", albums_path, "post" do

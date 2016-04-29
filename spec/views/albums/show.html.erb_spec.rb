@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "albums/show", type: :view do
   before(:each) do
-    @album = assign(:album, Album.create!(
-      :name => "Name",
-    ))
+    @album = assign(:album, FactoryGirl.create(:album, name: 'Name'))
   end
 
   it "renders attributes in <p>" do

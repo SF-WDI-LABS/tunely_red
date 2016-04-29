@@ -14,7 +14,7 @@ FactoryGirl.define do
   factory :album do
     name "Amazing album"
     release_date "2016-04-28 17:05:59"
-     
+    artist
   end
 
 end
