@@ -28,7 +28,7 @@ RSpec.describe AlbumsController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    { album: '', artist_name: '' }
+    { name: '' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,7 +103,7 @@ RSpec.describe AlbumsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { artist_name: 'test', name: 'music album' }
+        { name: 'music album' }
       }
 
       it "updates the requested album" do
