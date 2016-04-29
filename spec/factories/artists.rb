@@ -11,8 +11,8 @@
 
 FactoryGirl.define do
   factory :artist do
-    name "MyString"
-image_url "MyString"
+    name "The Beatles"
+    image_url "http://example.org/image.png"
   end
 
 end
