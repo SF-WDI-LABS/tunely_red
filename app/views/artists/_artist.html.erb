@@ -1,0 +1,52 @@
+<!-- one artist -->
+<div class="row artist">
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+
+    <!-- begin artist internal row -->
+      <div class='row'>
+        <div class="col-md-4 col-xs-12 thumbnail artist-art">
+          <% if artist.image_url %>
+            <img src="<%=artist.image_url%>" alt='artist image'>
+          <% else %>
+            <%= image_tag '800x800.png', alt: 'artist image' %>
+          <% end %>
+        </div>
+
+        <div class="col-md-8 col-xs-12">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h4 class='inline-header'>Artist Name:</h4>
+              <span class='artist-name'><%= artist.name %></span>
+            </li>
+
+            <li class="list-group-item">
+              <h4 class='inline-header'>Albums:</h4>
+              <ul>
+                <% artist.albums.each do |album| %>
+                  <li> <%= link_to album.name, album %> - (<%= album.release_date.year %>)</li>
+                <% end %>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+      <!-- end of artist internal row -->
+
+      <div class='panel-footer'>
+        <div class='panel-footer'>
+          <%= link_to 'Delete Artist', artist, method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure you want to delete '#{artist.name}'?" } %>
+          <%= link_to 'Edit Artist', edit_artist_path(artist), class: 'btn btn-info' %>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- end one artist -->
