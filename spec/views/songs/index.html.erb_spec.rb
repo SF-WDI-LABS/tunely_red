@@ -2,16 +2,17 @@ require 'rails_helper'
 
 RSpec.describe "songs/index", type: :view do
   before(:each) do
+    @album = FactoryGirl.create(:album)
     assign(:songs, [
       Song.create!(
         :name => "Name",
         :track_number => 1,
-        :album => nil
+        :album => @album
       ),
       Song.create!(
         :name => "Name",
         :track_number => 1,
-        :album => nil
+        :album => @album
       )
     ])
   end

@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'New Artist', new_artist_path, class: 'btn btn-primary' %>
+<%= link_to 'View Albums', albums_path, class: 'btn btn-primary' %>
+
+
 <h1>Listing Artists</h1>
 
 <%= render @artists, collection: @artists %>
 <br>
 
-<%= link_to 'New Artist', new_artist_path %>
