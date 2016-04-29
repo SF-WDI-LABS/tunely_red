@@ -1,0 +1,51 @@
+<!-- one album -->
+<div class="row album">
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+
+    <!-- begin album internal row -->
+      <div class='row'>
+        <div class="col-md-3 col-xs-12 thumbnail album-art">
+          <%= image_tag '800x800.png', alt: 'album image' %>
+        </div>
+
+        <div class="col-md-9 col-xs-12">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h4 class='inline-header'>Album Name:</h4>
+              <span class='album-name'><%= link_to album.name, album %></span>
+            </li>
+
+            <li class="list-group-item">
+              <h4 class='inline-header'>Artist Name:</h4>
+              <span class='artist-name'><%= album.artist_name %></span>
+            </li>
+
+            <li class="list-group-item">
+              <h4 class='inline-header'>Released date:</h4>
+              <span class='album-releaseDate'><%= album.release_date %></span>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+      <!-- end of album internal row -->
+
+      <div class='panel-footer'>
+        <div class='panel-footer'>
+          <!--<button class='btn btn-primary add-song'>Add Song</button>-->
+          <%= link_to 'Album Details', album, class: 'btn btn-primary' %>
+          <%= link_to 'Delete Album', album, method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure you want to delete '#{album.name}'?" } %>
+          <%= link_to 'Edit Album', edit_album_path(album), class: 'btn btn-info' %>
+          <!--<button class='btn btn-info edit-songs'>Edit Songs</button>-->
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- end one album -->

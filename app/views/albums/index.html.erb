@@ -1,31 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Albums</h1>
+<%= link_to 'New Album', new_album_path, class: 'btn btn-primary' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Release date</th>
-      <th>Artist name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @albums.each do |album| %>
-      <tr>
-        <td><%= album.name %></td>
-        <td><%= album.release_date %></td>
-        <td><%= album.artist_name %></td>
-        <td><%= link_to 'Show', album %></td>
-        <td><%= link_to 'Edit', edit_album_path(album) %></td>
-        <td><%= link_to 'Destroy', album, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1>Albums</h1>
+  <%= render @albums, collection: @albums %>
 <br>
 
-<%= link_to 'New Album', new_album_path %>

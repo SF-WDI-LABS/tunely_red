@@ -1,3 +1,9 @@
+@import "theme";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import 'albums';
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,7 +19,4 @@
  *= require_tree .
  *= require_self
  */
-
-@import "bootstrap-sprockets";
-@import "bootstrap";
 
