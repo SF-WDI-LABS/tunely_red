@@ -12,7 +12,7 @@
 
 <p>
   <strong>Artist name:</strong>
-  <%= @album.artist_name %>
+  <%= link_to @album.artist.name, artist_path(@album.artist) %>
 </p>
 
 <%= link_to 'Edit', edit_album_path(@album) %> |
